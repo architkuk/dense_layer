@@ -1,0 +1,25 @@
+#-----------------------------------------------------------
+# xsim v2024.1 (64-bit)
+# SW Build 5076996 on Wed May 22 18:36:09 MDT 2024
+# IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+# SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+# Start of session at: Mon Mar  3 02:38:18 2025
+# Process ID: 56861
+# Current directory: /home/ubuntu/src/project_data/aws-fpga/hdk/cl/examples/dense_layer/verif/sim/xsim/dense_layer_base_test_sv
+# Command line: xsim -log dense_layer_base_test.log -mode tcl -source {xsim.dir/tb/xsim_script.tcl}
+# Log file: /home/ubuntu/src/project_data/aws-fpga/hdk/cl/examples/dense_layer/verif/sim/xsim/dense_layer_base_test_sv/dense_layer_base_test.log
+# Journal file: /home/ubuntu/src/project_data/aws-fpga/hdk/cl/examples/dense_layer/verif/sim/xsim/dense_layer_base_test_sv/xsim.jou
+# Running On        :ip-172-31-43-53
+# Platform          :Ubuntu
+# Operating System  :Ubuntu 20.04.6 LTS
+# Processor Detail  :AMD EPYC 7R13 Processor
+# CPU Frequency     :2650.000 MHz
+# CPU Physical cores:24
+# CPU Logical cores :48
+# Host memory       :536585 MB
+# Swap memory       :10737 MB
+# Total Virtual     :547323 MB
+# Available Virtual :545235 MB
+#-----------------------------------------------------------
+source xsim.dir/tb/xsim_script.tcl
+source /home/ubuntu/src/project_data/aws-fpga/hdk/cl/examples/dense_layer/verif/scripts/waves.tcl

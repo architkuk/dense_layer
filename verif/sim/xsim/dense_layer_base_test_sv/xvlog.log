@@ -1,0 +1,128 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/cl/examples/dense_layer/design/dense_layer_core.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module dense_layer_core
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/cl/examples/dense_layer/design/dense_layer.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module dense_layer
+WARNING: [VRFC 10-3381] ignoring re-definition of command line macro 'CL_NAME' [/home/ubuntu/src/project_data/aws-fpga/hdk/cl/examples/dense_layer/design/dense_layer_defines.vh:23]
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/opt/Xilinx/Vivado/2024.1/data/verilog/src/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/lib/aws_clk_gen.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module aws_clk_gen
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/lib/aws_clk_regs.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module aws_clk_regs
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/lib/axil_to_cfg_cnv.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module axil_to_cfg_cnv
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/lib/axi_clock_conv.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module axi_clock_conv
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/lib/bram_1w1r.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module bram_1w1r
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/lib/cdc_sync.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cdc_sync
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/lib/flop_fifo.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module flop_fifo
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/lib/ft_fifo.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ft_fifo
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/lib/hbm_wrapper.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module hbm_wrapper
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/lib/lib_pipe.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module lib_pipe
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/lib/ram_fifo_ft.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ram_fifo_ft
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/lib/srl_fifo.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module srl_fifo
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/lib/xpm_fifo.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module xpm_fifo
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/lib/axis_flop_fifo.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module axis_flop_fifo
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/lib/bram_2rw.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module bram_2rw
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/lib/cdc_async_fifo.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cdc_async_fifo
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/lib/flop_fifo_in.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module flop_fifo_in
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/lib/ft_fifo_p.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ft_fifo_p
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/lib/interfaces.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/lib/rr_arb.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module rr_arb
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/shell_stable/design/sh_ddr/sim/sync.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module sync
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/shell_stable/design/sh_ddr/sim/mgt_acc_axl.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module mgt_acc_axl
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/shell_stable/design/sh_ddr/sim/mgt_gen_axl.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module mgt_gen_axl
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/shell_stable/design/sh_ddr/sim/ccf_ctl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ccf_ctl
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/shell_stable/design/sh_ddr/sim/flop_ccf.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module flop_ccf
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/shell_stable/design/sh_ddr/sim/sh_ddr.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module sh_ddr
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/shell_stable/design/sh_ddr/sim/axi4_slave_bfm.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module axi4_slave_bfm
+WARNING: [VRFC 10-3824] variable 'awready_cnt' must explicitly be declared as automatic or static [/home/ubuntu/src/project_data/aws-fpga/hdk/common/shell_stable/design/sh_ddr/sim/axi4_slave_bfm.sv:144]
+WARNING: [VRFC 10-3824] variable 'wready_cnt' must explicitly be declared as automatic or static [/home/ubuntu/src/project_data/aws-fpga/hdk/common/shell_stable/design/sh_ddr/sim/axi4_slave_bfm.sv:178]
+WARNING: [VRFC 10-3824] variable 'wready_nonzero_wait' must explicitly be declared as automatic or static [/home/ubuntu/src/project_data/aws-fpga/hdk/common/shell_stable/design/sh_ddr/sim/axi4_slave_bfm.sv:179]
+WARNING: [VRFC 10-3824] variable 'arready_cnt' must explicitly be declared as automatic or static [/home/ubuntu/src/project_data/aws-fpga/hdk/common/shell_stable/design/sh_ddr/sim/axi4_slave_bfm.sv:242]
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/models/xilinx_axi_pc/axi_protocol_checker_v1_1_vl_rfs.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module axi_protocol_checker_v1_1_12_axi4litepc_asr_inline
+INFO: [VRFC 10-311] analyzing module axi_protocol_checker_v1_1_12_axi4pc_asr_inline
+INFO: [VRFC 10-311] analyzing module axi_protocol_checker_v1_1_12_core
+INFO: [VRFC 10-311] analyzing module axi_protocol_checker_v1_1_12_syn_fifo
+INFO: [VRFC 10-311] analyzing module axi_protocol_checker_v1_1_12_reporter
+INFO: [VRFC 10-311] analyzing module axi_protocol_checker_v1_1_12_top
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/models/ddr4_model/ddr4_sdram_model_wrapper.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module StateTable
+INFO: [VRFC 10-311] analyzing module ddr4_model
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/models/ddr4_rdimm_wrapper/ddr4_rcd_model.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ddr4_rcd_model
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/models/ddr4_rdimm_wrapper/ddr4_rdimm_wrapper.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ddr4_rdimm_wrapper
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/models/ddr4_rdimm_wrapper/ddr4_dimm.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ddr4_dimm
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/models/ddr4_rdimm_wrapper/ddr4_bi_delay.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module bi_delay_ddr4
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/models/ddr4_rdimm_wrapper/ddr4_db_delay_model.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ddr4_db_delay_model
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/models/ddr4_rdimm_wrapper/ddr4_dir_detect.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module dir_detect
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/models/ddr4_rdimm_wrapper/ddr4_db_dly_dir.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ddr_dly_dir_detect
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/models/ddr4_rdimm_wrapper/ddr4_rank.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ddr4_rank
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/packages/anp_base_pkg.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/models/fpga/fpga.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fpga
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/models/fpga/card.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module card
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/tb/sv/tb_type_defines_pkg.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/tb/sv/tb.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb
+WARNING: [VRFC 10-3824] variable 'debug' must explicitly be declared as automatic or static [/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/include/sh_dpi_tasks.svh:215]
+WARNING: [VRFC 10-3824] variable 'debug' must explicitly be declared as automatic or static [/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/include/sh_dpi_tasks.svh:257]
+INFO: [VRFC 10-311] analyzing module short
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/models/sh_bfm/axil_bfm.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module axil_bfm
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/models/sh_bfm/axis_bfm_pkg.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/models/sh_bfm/axis_bfm.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module axis_bfm
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/models/sh_bfm/sh_bfm.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module sh_bfm
+WARNING: [VRFC 10-3824] variable 'awready_cnt' must explicitly be declared as automatic or static [/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/models/sh_bfm/sh_bfm.sv:888]
+WARNING: [VRFC 10-3824] variable 'wready_cnt' must explicitly be declared as automatic or static [/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/models/sh_bfm/sh_bfm.sv:927]
+WARNING: [VRFC 10-3824] variable 'wready_nonzero_wait' must explicitly be declared as automatic or static [/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/models/sh_bfm/sh_bfm.sv:928]
+WARNING: [VRFC 10-3824] variable 'arready_cnt' must explicitly be declared as automatic or static [/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/models/sh_bfm/sh_bfm.sv:990]
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/ip/cl_ip/cl_ip.gen/sources_1/bd/cl_axi_sc_1x1/hdl/cl_axi_sc_1x1_wrapper.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cl_axi_sc_1x1_wrapper
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/ip/cl_ip/cl_ip.gen/sources_1/bd/cl_axi_sc_2x2/hdl/cl_axi_sc_2x2_wrapper.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cl_axi_sc_2x2_wrapper
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/models/base/gen_buf_t.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/models/stream_bfm/stream_bfm.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module stream_bfm
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/verif/tb/sv/dma_classes.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/common/ip/cl_ip/cl_ip.gen/sources_1/ip/cl_hbm/hdl/hbm_v1_0_vl_rfs.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module hbm_top
+INFO: [VRFC 10-311] analyzing module hbm_apb_mst
+INFO: [VRFC 10-311] analyzing module hbm_temp_rd
+INFO: [VRFC 10-311] analyzing module hbm_apb_arbiter
+INFO: [VRFC 10-311] analyzing module hbm_data_fetch
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/ubuntu/src/project_data/aws-fpga/hdk/cl/examples/dense_layer/verif/tests/dense_layer_base_test.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module dense_layer_base_test
