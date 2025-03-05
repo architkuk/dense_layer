@@ -23,9 +23,7 @@
 module dense_layer
     #(
       parameter EN_DDR = 0,
-      parameter EN_HBM = 0,
-      parameter IN_FEATURES = 128,
-      parameter OUT_FEATURES = 64
+      parameter EN_HBM = 0
     )
     (
       `include "cl_ports.vh"
@@ -39,28 +37,28 @@ module dense_layer
 // GLOBALS
 //=============================================================================
 
-  // Add signals for dense_layer_core
-  logic [1023:0] core_data_in;
-  logic core_data_in_valid;
-  logic [511:0] core_data_out;
-  logic core_data_out_valid;
+  logic signed [31:0] input_x [0:63];
+  logic signed [31:0] weights [0:127][0:63];
+  logic signed [31:0] biases [0:127];
+  logic signed [31:0] output_y [0:127];
 
-  // Instantiate dense_layer_core
-  dense_layer_core #(
-    .IN_FEATURES(IN_FEATURES),
-    .OUT_FEATURES(OUT_FEATURES)
-  ) dense_layer_core_inst (
-    .clk(clk_main_a0),
-    .rst(!rst_main_n),
-    .data_in(core_data_in),
-    .data_in_valid(core_data_in_valid),
-    .data_out(core_data_out),
-    .data_out_valid(core_data_out_valid)
-  );
+  genvar n;
+  generate
+      for (n = 0; n < 128; n++) begin : neuron_gen
+          dense_layer_core neuron_core_inst (
+              .clk(clk_main_a0),
+              .rst_n(rst_main_n),
+              .input_x(input_x),
+              .weights(weights[n]),
+              .bias(biases[n]),
+              .neuron_output(output_y[n])
+          );
+      end
+  endgenerate
 
   always_comb begin
      cl_sh_flr_done    = 'b1;
-     cl_sh_status0     = 'b0;
+     cl_sh_status0     = output_y[0];
      cl_sh_status1     = 'b0;
      cl_sh_status2     = 'b0;
      cl_sh_id0         = `CL_SH_ID0;
@@ -75,156 +73,47 @@ module dense_layer
 // PCIM
 //=============================================================================
 
-  // Internal memory and registers
-  logic [31:0] internal_mem [0:1023];
-  logic [9:0]  addr_reg;
-  logic [7:0]  arlen_reg;
+  // Cause Protocol Violations
+  always_comb begin
+    cl_sh_pcim_awaddr  = 'b0;
+    cl_sh_pcim_awsize  = 'b0;
+    cl_sh_pcim_awburst = 'b0;
+    cl_sh_pcim_awvalid = 'b0;
 
-  // Output registers
-  logic        pcis_awready_reg;
-  logic        pcis_wready_reg;
-  logic        pcis_bvalid_reg;
-  logic [1:0]  pcis_bresp_reg;
-  logic        pcis_arready_reg;
-  logic        pcis_rvalid_reg;
-  logic [511:0] pcis_rdata_reg;
-  logic [1:0]  pcis_rresp_reg;
+    cl_sh_pcim_wdata   = 'b0;
+    cl_sh_pcim_wstrb   = 'b0;
+    cl_sh_pcim_wlast   = 'b0;
+    cl_sh_pcim_wvalid  = 'b0;
 
-  // AXI-Lite slave interface state
-  typedef enum logic [1:0] {
-    IDLE,
-    WRITE_DATA,
-    WRITE_RESP,
-    READ_DATA
-  } axi_state_t;
-  
-  axi_state_t curr_state;
-
-  // Single source of truth for AXI signals
-  always_ff @(posedge clk_main_a0) begin
-    if (!rst_main_n) begin
-      curr_state <= IDLE;
-      addr_reg <= '0;
-      arlen_reg <= '0;
-      
-      // Initialize output registers
-      pcis_awready_reg <= 1'b1;
-      pcis_wready_reg  <= 1'b1;
-      pcis_bvalid_reg  <= 1'b0;
-      pcis_bresp_reg   <= 2'b00;
-      pcis_arready_reg <= 1'b1;
-      pcis_rvalid_reg  <= 1'b0;
-      pcis_rdata_reg   <= '0;
-      pcis_rresp_reg   <= 2'b00;
-    end else begin
-      case (curr_state)
-        IDLE: begin
-          pcis_awready_reg <= 1'b1;
-          pcis_wready_reg  <= 1'b1;
-          pcis_arready_reg <= 1'b1;
-          pcis_bvalid_reg  <= 1'b0;
-          pcis_rvalid_reg  <= 1'b0;
-          
-          if (sh_cl_dma_pcis_awvalid && pcis_awready_reg) begin
-            addr_reg <= sh_cl_dma_pcis_awaddr[11:2];
-            pcis_awready_reg <= 1'b0;
-            curr_state <= WRITE_DATA;
-          end else if (sh_cl_dma_pcis_arvalid && pcis_arready_reg) begin
-            addr_reg <= sh_cl_dma_pcis_araddr[11:2];
-            arlen_reg <= sh_cl_dma_pcis_arlen;
-            pcis_arready_reg <= 1'b0;
-            curr_state <= READ_DATA;
-          end
-        end
-
-        WRITE_DATA: begin
-          if (sh_cl_dma_pcis_wvalid && pcis_wready_reg) begin
-            if (addr_reg < IN_FEATURES * OUT_FEATURES) begin
-                // Write to weight memory
-                dense_layer_core_inst.weight_rom[addr_reg / OUT_FEATURES][addr_reg % OUT_FEATURES] <= sh_cl_dma_pcis_wdata[31:0];
-            end else if (addr_reg < (IN_FEATURES * OUT_FEATURES + OUT_FEATURES)) begin
-                // Write to bias memory
-                dense_layer_core_inst.bias_rom[addr_reg - (IN_FEATURES * OUT_FEATURES)] <= sh_cl_dma_pcis_wdata[31:0];
-            end else begin
-                // Write to input/output memory
-                internal_mem[addr_reg] <= sh_cl_dma_pcis_wdata[31:0];
-            end
-            pcis_wready_reg <= 1'b0;
-            pcis_bvalid_reg <= 1'b1;
-            pcis_bresp_reg <= 2'b00;
-            curr_state <= WRITE_RESP;
-          end
-        end
-
-        WRITE_RESP: begin
-          if (sh_cl_dma_pcis_bready && pcis_bvalid_reg) begin
-            pcis_bvalid_reg <= 1'b0;
-            curr_state <= IDLE;
-          end
-        end
-
-        READ_DATA: begin
-          pcis_rvalid_reg <= 1'b1;
-          pcis_rresp_reg <= 2'b00;
-          pcis_rdata_reg <= {480'b0, internal_mem[addr_reg]};
-          
-          if (sh_cl_dma_pcis_rready && pcis_rvalid_reg) begin
-            if (arlen_reg == 0) begin
-              pcis_rvalid_reg <= 1'b0;
-              curr_state <= IDLE;
-            end else begin
-              arlen_reg <= arlen_reg - 1;
-              addr_reg <= addr_reg + 1;
-            end
-          end
-        end
-
-        default: begin
-          curr_state <= IDLE;
-        end
-      endcase
-    end
+    cl_sh_pcim_araddr  = 'b0;
+    cl_sh_pcim_arsize  = 'b0;
+    cl_sh_pcim_arburst = 'b0;
+    cl_sh_pcim_arvalid = 'b0;
   end
 
-  // Connect output registers to interface signals
-  assign cl_sh_dma_pcis_awready = pcis_awready_reg;
-  assign cl_sh_dma_pcis_wready  = pcis_wready_reg;
-  assign cl_sh_dma_pcis_bvalid  = pcis_bvalid_reg;
-  assign cl_sh_dma_pcis_bresp   = pcis_bresp_reg;
-  assign cl_sh_dma_pcis_arready = pcis_arready_reg;
-  assign cl_sh_dma_pcis_rvalid  = pcis_rvalid_reg;
-  assign cl_sh_dma_pcis_rdata   = pcis_rdata_reg;
-  assign cl_sh_dma_pcis_rresp   = pcis_rresp_reg;
+  // Remaining CL Output Ports
+  always_comb begin
+    cl_sh_pcim_awid    = 'b0;
+    cl_sh_pcim_awlen   = 'b0;
+    cl_sh_pcim_awcache = 'b0;
+    cl_sh_pcim_awlock  = 'b0;
+    cl_sh_pcim_awprot  = 'b0;
+    cl_sh_pcim_awqos   = 'b0;
+    cl_sh_pcim_awuser  = 'b0;
 
-  // PCIe signals
-  assign PCIE_EP_TXP = '0;
-  assign PCIE_EP_TXN = '0;
-  assign PCIE_RP_PERSTN = '0;
-  assign PCIE_RP_TXP = '0;
-  assign PCIE_RP_TXN = '0;
+    cl_sh_pcim_wid     = 'b0;
+    cl_sh_pcim_wuser   = 'b0;
 
-  // Tie off unused interfaces
-  assign cl_ocl_tx_q = '0;
-  assign cl_ocl_xaction_id = '0;
-  assign cl_sh_ddr_awid = '0;
-  assign cl_sh_ddr_awaddr = '0;
-  assign cl_sh_ddr_awlen = '0;
-  assign cl_sh_ddr_awsize = '0;
-  assign cl_sh_ddr_awburst = '0;
-  assign cl_sh_ddr_awvalid = '0;
-  assign cl_sh_ddr_wid = '0;
-  assign cl_sh_ddr_wdata = '0;
-  assign cl_sh_ddr_wstrb = '0;
-  assign cl_sh_ddr_wlast = '0;
-  assign cl_sh_ddr_wvalid = '0;
-  assign cl_sh_ddr_bready = '0;
-  assign cl_sh_ddr_arid = '0;
-  assign cl_sh_ddr_araddr = '0;
-  assign cl_sh_ddr_arlen = '0;
-  assign cl_sh_ddr_arsize = '0;
-  assign cl_sh_ddr_arburst = '0;
-  assign cl_sh_ddr_arvalid = '0;
-  assign cl_sh_ddr_rready = '0;
+    cl_sh_pcim_arid    = 'b0;
+    cl_sh_pcim_arlen   = 'b0;
+    cl_sh_pcim_arcache = 'b0;
+    cl_sh_pcim_arlock  = 'b0;
+    cl_sh_pcim_arprot  = 'b0;
+    cl_sh_pcim_arqos   = 'b0;
+    cl_sh_pcim_aruser  = 'b0;
+
+    cl_sh_pcim_rready  = 'b0;
+  end
 
 //=============================================================================
 // PCIS
@@ -239,8 +128,14 @@ module dense_layer
 
   // Remaining CL Output Ports
   always_comb begin
+    cl_sh_dma_pcis_awready = 'b0;
+
+    cl_sh_dma_pcis_wready  = 'b0;
+
     cl_sh_dma_pcis_bid     = 'b0;
     cl_sh_dma_pcis_bvalid  = 'b0;
+
+    cl_sh_dma_pcis_arready  = 'b0;
 
     cl_sh_dma_pcis_rid     = 'b0;
     cl_sh_dma_pcis_rdata   = 'b0;
@@ -414,6 +309,19 @@ module dense_layer
     hbm_apb_pready_0  = 'b0;
     hbm_apb_prdata_0  = 'b0;
     hbm_apb_pslverr_0 = 'b0;
+  end
+
+//=============================================================================
+// C2C IO
+//=============================================================================
+
+  always_comb begin
+    PCIE_EP_TXP    = 'b0;
+    PCIE_EP_TXN    = 'b0;
+
+    PCIE_RP_PERSTN = 'b0;
+    PCIE_RP_TXP    = 'b0;
+    PCIE_RP_TXN    = 'b0;
   end
 
 endmodule // dense_layer
