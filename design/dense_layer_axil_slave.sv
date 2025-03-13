@@ -40,6 +40,7 @@ module dense_layer_axil_slave #(
   input  logic [31:0]         debug_counter,
   input  logic [63:0]         start_time,
   input  logic [63:0]         end_time,
+  input  logic                all_done,
 
   output logic                start,
   output logic                debug_rst_local
@@ -57,6 +58,7 @@ module dense_layer_axil_slave #(
   localparam REG_START_TIME_H    = 32'h0000_0014;
   localparam REG_END_TIME_L      = 32'h0000_0018;
   localparam REG_END_TIME_H      = 32'h0000_001C;
+  localparam REG_ALL_DONE        = 32'h0000_0020;
 
   // R/W user registers
   logic reg_start;
@@ -219,6 +221,7 @@ module dense_layer_axil_slave #(
       REG_START_TIME_H:     read_data = start_time[63:32];
       REG_END_TIME_L:       read_data = end_time[31:0];
       REG_END_TIME_H:       read_data = end_time[63:32];
+      REG_ALL_DONE:         read_data = {31'b0, all_done};
       default:              read_data = 32'hDEAD_BEEF;
     endcase
   end
