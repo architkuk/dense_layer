@@ -1,6 +1,7 @@
 module dense_layer_core (
     input logic clk,
     input logic rst_n,
+    input logic start,
     input logic signed [31:0] input_x [0:63],
     input logic signed [31:0] weights [0:63],
     input logic signed [31:0] bias,
@@ -35,7 +36,15 @@ always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
         neuron_output <= 32'd0;
         done <= 1'b0;
-    end else begin
+    end
+    // Whenever user asserts 'start', we clear 'done' again
+    else if (start) begin
+        done <= 1'b0;
+        // If you want the neuron_output to reset too, do that here
+        neuron_output <= 32'd0;
+    end
+    else begin
+        // Normal operation
         neuron_output <= accumulator[31:0];
         done <= 1'b1;
     end
