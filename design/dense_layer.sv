@@ -78,6 +78,7 @@ generate
         dense_layer_core neuron_core_inst (
             .clk           (clk_main_a0),
             .rst_n         (rst_main_n),
+            .start         (start),
             .input_x       (input_x),
             .weights       (weights[n]),
             .bias          (biases[n]),
@@ -241,6 +242,7 @@ dense_layer_axil_slave #(
   .debug_counter   (debug_counter_local),
   .start_time      (start_time),
   .end_time        (end_time),
+  .all_done        (all_done),
   .start           (start),
   .debug_rst_local (debug_rst_local)
 );
